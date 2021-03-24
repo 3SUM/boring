@@ -1,4 +1,6 @@
+import re
 import os
+import json
 import datetime
 import psycopg2
 import discord
