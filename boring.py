@@ -10,7 +10,7 @@ DATABASE_URL = os.environ["DATABASE_URL"]
 
 intents = discord.Intents.default()
 intents.members = True
-bot = commands.Bot(command_prefix="?", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 
 class Boring:
