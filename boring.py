@@ -285,7 +285,7 @@ class Boring:
                 await ctx.message.delete()
         else:
             await ctx.send(
-                "You do not have the necessary permissions to create an send a message via Sally!"
+                "You do not have the necessary permissions to create an send a message!"
             )
 
     @bot.command()
@@ -300,7 +300,7 @@ class Boring:
             )
             await ctx.send(embed=failed_embed)
             return
-        if str(course) in Sally.courses_list:
+        if str(course) in Boring.courses_list:
             if discord.utils.get(
                 guild.channels,
                 name=(f"ticket-{course}-{ctx.message.author.name.lower()}"),
