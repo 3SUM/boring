@@ -1,0 +1,1 @@
+wworker: python boring.py
