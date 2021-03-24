@@ -1,1 +1,1 @@
-wworker: python boring.py
+worker: python boring.py
