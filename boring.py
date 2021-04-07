@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 class Boring:
     courses_list = ["135", "202", "218", "219", "370"]
-    thank_you_list = ["THANK YOU", "THANKS"]
+    thank_you_list = ["THANK YOU", "THANKS", "TY"]
     conn = None
     cur = None
 
@@ -60,7 +60,8 @@ class Boring:
         await discord.Member.add_roles(member, student_role)
 
         channel = discord.utils.get(
-            guild.voice_channels, name=(f"Member Count: {guild.member_count - 1}")
+            guild.voice_channels, name=(
+                f"Member Count: {guild.member_count - 1}")
         )
         if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
@@ -69,7 +70,8 @@ class Boring:
     async def on_member_remove(member):
         guild = member.guild
         channel = discord.utils.get(
-            guild.voice_channels, name=(f"Member Count: {guild.member_count + 1}")
+            guild.voice_channels, name=(
+                f"Member Count: {guild.member_count + 1}")
         )
         if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
@@ -191,7 +193,8 @@ class Boring:
 
             if "fields" in data:
                 for field in data["fields"]:
-                    ce.add_field(name=field["name"], value=field["value"], inline=False)
+                    ce.add_field(name=field["name"],
+                                 value=field["value"], inline=False)
 
             if await ctx.send(embed=ce):
                 await ctx.message.delete()
@@ -276,7 +279,8 @@ class Boring:
         )
         profile_embed.set_thumbnail(url=member.avatar_url)
         profile_embed.add_field(name="Karma", value=karma, inline=False)
-        profile_embed.add_field(name="Date Joined", value=join_date, inline=True)
+        profile_embed.add_field(
+            name="Date Joined", value=join_date, inline=True)
         profile_embed.add_field(name="Roles", value=roles, inline=True)
         await ctx.send(embed=profile_embed)
 
