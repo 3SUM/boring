@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 class Boring:
     courses_list = ["135", "202", "218", "219", "370"]
-    thank_you_list = ["THANK YOU", "THANKS", "TY"]
+    thank_you_list = ["THANK YOU", "THANKS"]
     conn = None
     cur = None
 
