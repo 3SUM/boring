@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 class Boring:
     courses_list = ["135", "202", "218", "219", "370"]
-    thank_you_list = ["THANK YOU", "THANKS"]
+    thank_you_list = ["THANK YOU", "THANK U", "THANKS", "TY"]
     conn = None
     cur = None
 
@@ -80,8 +80,8 @@ class Boring:
             return
 
         content = message.content.upper()
-        for check in Boring.thank_you_list:
-            if content.find(check) > -1:
+        for word in Boring.thank_you_list:
+            if Boring.find_word(word)(content):
                 for i in message.mentions:
                     if i != message.author and i != bot.user:
                         try:
@@ -352,6 +352,9 @@ class Boring:
             await ctx.send(
                 f"`!ticket <course number>`\n\nInvalid course number, refer to `!courses`"
             )
+
+    def find_word(w):
+        return re.compile(r"\b({0})\b".format(w), flags=re.IGNORECASE).search
 
     def main():
         Boring.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
