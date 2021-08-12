@@ -79,6 +79,12 @@ class Polly:
         if message.author == bot.user:
             return
 
+        guild = message.author.guild
+        channel = discord.utils.get(
+            guild.voice_channels, name=(f"Member Count: 1205")
+        )
+        if channel:
+            await channel.edit(name=(f"Member Count: {guild.member_count}"))
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
