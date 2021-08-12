@@ -1,7 +1,7 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/3SUM"><img width="200" src="./logo/boring.png" alt="Polly logo"></a>
+<a href="https://github.com/3SUM"><img width="200" src="./logo/polly.png" alt="Polly logo"></a>
 </p>
 
 <br>
