@@ -15,7 +15,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
-class Boring:
+class Polly:
     courses_list = ["135", "202", "218", "219", "370"]
     thank_you_list = ["THANK YOU", "THANK U", "THANKS", "TY"]
     conn = None
@@ -37,7 +37,7 @@ class Boring:
             category = await guild.create_category(name="Tickets")
 
         try:
-            Boring.cur.execute(
+            Polly.cur.execute(
                 sql.SQL(
                     "CREATE TABLE IF NOT EXISTS {} (name VARCHAR(255) NOT NULL, karma INTEGER, UNIQUE(name))"
                 ).format(sql.Identifier(guild.name))
@@ -45,9 +45,9 @@ class Boring:
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             try:
-                Boring.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
-                Boring.conn.autocommit = True
-                Boring.cur = Boring.conn.cursor()
+                Polly.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+                Polly.conn.autocommit = True
+                Polly.cur = Polly.conn.cursor()
             except (Exception, psycopg2.DatabaseError) as conErr:
                 print(conErr)
         finally:
@@ -80,14 +80,14 @@ class Boring:
             return
 
         content = message.content.upper()
-        for word in Boring.thank_you_list:
-            if Boring.find_word(word)(content):
+        for word in Polly.thank_you_list:
+            if Polly.find_word(word)(content):
                 for i in message.mentions:
                     if i != message.author and i != bot.user:
                         try:
                             name = i.name + i.discriminator
                             guild = message.author.guild
-                            Boring.cur.execute(
+                            Polly.cur.execute(
                                 sql.SQL(
                                     "INSERT INTO {table} (name, karma) VALUES (%s, %s) ON CONFLICT (name) DO UPDATE SET karma = {table}.karma + 1;"
                                 ).format(table=sql.Identifier(guild.name)),
@@ -96,11 +96,11 @@ class Boring:
                         except (Exception, psycopg2.DatabaseError) as error:
                             print(error)
                             try:
-                                Boring.conn = psycopg2.connect(
+                                Polly.conn = psycopg2.connect(
                                     DATABASE_URL, sslmode="require"
                                 )
-                                Boring.conn.autocommit = True
-                                Boring.cur = Boring.conn.cursor()
+                                Polly.conn.autocommit = True
+                                Polly.cur = Polly.conn.cursor()
                             except (Exception, psycopg2.DatabaseError) as conErr:
                                 print(conErr)
                         finally:
@@ -205,18 +205,18 @@ class Boring:
         karma_dict = None
         member = ctx.author
         try:
-            Boring.cur.execute(
+            Polly.cur.execute(
                 sql.SQL("SELECT * FROM {} ORDER BY karma DESC;").format(
                     sql.Identifier(member.guild.name)
                 )
             )
-            karma_dict = Boring.cur.fetchall()
+            karma_dict = Polly.cur.fetchall()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             try:
-                Boring.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
-                Boring.conn.autocommit = True
-                Boring.cur = Boring.conn.cursor()
+                Polly.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+                Polly.conn.autocommit = True
+                Polly.cur = Polly.conn.cursor()
             except (Exception, psycopg2.DatabaseError) as conErr:
                 print(conErr)
 
@@ -241,19 +241,19 @@ class Boring:
         name = member.name + member.discriminator
         karma = 0
         try:
-            Boring.cur.execute(
+            Polly.cur.execute(
                 sql.SQL("SELECT karma FROM {} WHERE name = %s").format(
                     sql.Identifier(member.guild.name)
                 ),
                 [name],
             )
-            karma = Boring.cur.fetchone()
+            karma = Polly.cur.fetchone()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             try:
-                Boring.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
-                Boring.conn.autocommit = True
-                Boring.cur = Boring.conn.cursor()
+                Polly.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+                Polly.conn.autocommit = True
+                Polly.cur = Polly.conn.cursor()
             except (Exception, psycopg2.DatabaseError) as conErr:
                 print(conErr)
         finally:
@@ -302,7 +302,7 @@ class Boring:
             )
             await ctx.send(embed=failed_embed)
             return
-        if str(course) in Boring.courses_list:
+        if str(course) in Polly.courses_list:
             if discord.utils.get(
                 guild.channels,
                 name=(f"ticket-{course}-{ctx.message.author.name.lower()}"),
@@ -357,11 +357,11 @@ class Boring:
         return re.compile(r"\b({0})\b".format(w), flags=re.IGNORECASE).search
 
     def main():
-        Boring.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
-        Boring.conn.autocommit = True
-        Boring.cur = Boring.conn.cursor()
+        Polly.conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+        Polly.conn.autocommit = True
+        Polly.cur = Polly.conn.cursor()
         bot.run(TOKEN)
 
 
 if __name__ == "__main__":
-    Boring.main()
+    Polly.main()

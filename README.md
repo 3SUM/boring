@@ -1,14 +1,12 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/3SUM"><img width="200" src="./logo/boring.png" alt="Boring logo"></a>
+<a href="https://github.com/3SUM"><img width="200" src="./logo/boring.png" alt="Polly logo"></a>
 </p>
 
 <br>
 
-# The Boring Bot 
-
-The Boring bot version of Sally and Bobby all in one!
+# Polly
 
 In use for the University of Nevada, Las Vegas Computer Science Discord server.
 
