@@ -79,6 +79,9 @@ class Polly:
         if message.author == bot.user:
             return
         
+        g_unit = message.author.guild
+        channels = discord.utils.get(g_unit.voice_channels)
+        print(channels)
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
