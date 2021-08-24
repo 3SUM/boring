@@ -79,6 +79,7 @@ class Polly:
         
         # pls work
         g_unit = message.author.guild
+        print(g_unit.get_channel(875441162968772618))
         print(g_unit.voice_channels[0].id)
         content = message.content.upper()
         for word in Polly.thank_you_list:
