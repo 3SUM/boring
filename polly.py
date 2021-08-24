@@ -68,9 +68,7 @@ class Polly:
     @bot.event
     async def on_member_remove(member):
         guild = member.guild
-        channel = discord.utils.get(
-            guild.voice_channels, name=(f"Member Count: {guild.member_count + 1}")
-        )
+        channel = discord.utils.get("875441162968772618")
         if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
@@ -81,7 +79,7 @@ class Polly:
         
         # pls work
         g_unit = message.author.guild
-        print(g_unit.voice_channels)
+        print(g_unit.voice_channels[0])
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
