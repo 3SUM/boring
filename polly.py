@@ -79,6 +79,7 @@ class Polly:
         if message.author == bot.user:
             return
         
+        # pls work
         g_unit = message.author.guild
         print(g_unit.voice_channels)
         content = message.content.upper()
