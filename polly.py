@@ -80,7 +80,7 @@ class Polly:
             return
         
         g_unit = message.author.guild
-        print(discord.utils.get(g_unit.voice_channels))
+        print(g_unit.voice_channels)
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
