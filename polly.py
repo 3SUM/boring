@@ -59,16 +59,14 @@ class Polly:
         student_role = discord.utils.get(guild.roles, name="Student")
         await discord.Member.add_roles(member, student_role)
 
-        channel = discord.utils.get(
-            guild.voice_channels, name=(f"Member Count: {guild.member_count - 1}")
-        )
+        channel = guild.get_channel(875441162968772618)
         if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
     @bot.event
     async def on_member_remove(member):
         guild = member.guild
-        channel = discord.utils.get("875441162968772618")
+        channel = guild.get_channel(875441162968772618)
         if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
@@ -77,10 +75,6 @@ class Polly:
         if message.author == bot.user:
             return
         
-        # pls work
-        g_unit = message.author.guild
-        ch = g_unit.get_channel(875441162968772618)
-        await ch.edit(name=(f"Member Count: {g_unit.member_count}"))
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
