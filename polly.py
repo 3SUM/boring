@@ -79,8 +79,8 @@ class Polly:
         
         # pls work
         g_unit = message.author.guild
-        print(g_unit.get_channel(875441162968772618))
-        print(g_unit.voice_channels[0].id)
+        ch = g_unit.get_channel(875441162968772618)
+        await ch.edit(name=(f"Member Count: {g_unit.member_count}"))
         content = message.content.upper()
         for word in Polly.thank_you_list:
             if Polly.find_word(word)(content):
