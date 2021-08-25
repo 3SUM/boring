@@ -122,7 +122,7 @@ class Polly:
         guild = ctx.message.guild
         member = ctx.message.author
         member_roles = member.roles
-        ta_role = discord.utils.get(guild.roles, name="TA")
+        ta_role = discord.utils.get(guild.roles, name="Teaching Assistant (TA)")
 
         if ta_role in member_roles:
             if ctx.message.channel.name.find("ticket") > -1:
